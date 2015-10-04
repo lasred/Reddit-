@@ -13,3 +13,62 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+.to_bold {
+	font-weight: bold;
+}
+#logo {
+	font-size: 26px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 15px 5px;
+	a {
+		color: rebeccapurple;
+	}
+}
+.container {
+	min-width: 480px;
+}
+.nav-right {
+	float: right; 
+}
+nav {
+	li {
+		float:left;
+	}
+}
+#content {
+	h2 {
+		font-size: 19px;
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+	
+	.link {
+		padding: 1em 1em;
+		border-bottom: 4px dotted #e9e9e9;
+		.title {
+
+			a {
+				color: #FF4500;
+			}
+		}
+	}
+
+	.comments_title {
+		margin-top: 2em;
+	}
+
+	#comments {
+		.comment {
+			padding: 1em 0;
+			border-top: 1px solid #E9E9E9;
+			.lead {
+				margin-bottom: 0;
+			}
+		}
+	}
+}
+

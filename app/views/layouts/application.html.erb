@@ -5,27 +5,35 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag "download.png" %>
 </head>
 <body>
+	<header class="navbar navbar-default">
+      <div class="container">
+        <div id="logo" class="navbar-brand">
+        	<%= link_to("Reddit", root_path)%>
+        </div>
+        <nav>
+        	<ul class="nav navbar-nav nav-right">
+        	<% if user_signed_in? %>
+				<li><%= link_to('Submit link', new_link_path)%></li>
+				<li><%= link_to('Account', edit_user_registration_path)%></li>
+				<li><%= link_to 'Sign out', destroy_user_session_path, :method => :delete %></li>
+			<% else -%>
+				<li><%= link_to('Sign up', new_user_registration_path) %></li>
+				<li><%= link_to('Sign in', new_user_session_path) %></li>
+			</ul>
+			<% end %>
+		</ul>
+        </nav>
+      </div>
+  </header>
+
 	<% flash.each do |name, msg| %>
-		<%= content_tag(:div, msg, class:"alert alert-#{name}") %>
-	<%end %>
-	<% if user_signed_in? %>
-		<ul>
-			<li><%= link_to("Submit Link", new_link_path) %></li>
-		 <li><%= link_to("Account", edit_user_registration_path) %>  </li>
-		   <li><%= link_to("Sign out", destroy_user_session_path,
-		       :method=> :delete) %> </li>
-		</ul>
-	<% else %>
-		<ul>
-			<li><%= link_to("Sign in", new_user_session_path) %></li>
-			<li><%= link_to("Sign up", new_user_registration_path) %></li>
-		</ul>
-
+		<%= content_tag(:div, msg, class: "alert alert-info") %>
 	<% end %>
-	<%= yield %>
-
-
+	<div id="content">
+		<%= yield %>
+	</div>
 </body>
 </html>

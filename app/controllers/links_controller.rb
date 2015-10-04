@@ -1,6 +1,5 @@
 class LinksController < ApplicationController
   before_action :set_link, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /links
   # GET /links.json
@@ -12,7 +11,9 @@ class LinksController < ApplicationController
   # GET /links/1.json
   def show
   end
-
+  def previous 
+    redirect_to(session.delete(:return_to))
+  end 
   # GET /links/new
   def new
     @link = current_user.links.build
@@ -20,6 +21,7 @@ class LinksController < ApplicationController
 
   # GET /links/1/edit
   def edit
+    session[:return_to] = request.referer
   end
 
   # POST /links

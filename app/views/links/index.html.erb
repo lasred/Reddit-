@@ -1,31 +1,29 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Links</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Url</th>
-      <th>Author email</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @links.each do |link| %>
-      <tr>
-        <td class="content"><%= link.title %></td>
-        <td class="content"><%= link_to(link.url, link.url) %></td>
-        <td class="content"> <%= User.find(link.user_id).email %></td>
-        <td class="option"><%= link_to 'Show', link %></td> 
-        <% if link.user == current_user %>
-          <td class="option"><%= link_to 'Edit', edit_link_path(link) %></td>
-          <td class="option"><%= link_to 'Destroy', link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<% @links.each do |link| %>
+  <div class="link row clearfix">
+    <h2>
+      <%= link_to(link.title, link) %> 
+       <% offset = 7
+        s = link.url
+        if s.index("https") != nil
+          offset = 8
+        end 
+        if s.index("wwww") != nil
+           offset += 3
+        end
+        comIndex = s.index("com")
+        s = link.url[offset, + comIndex + 3 - offset]%>
+        (<%= link_to(s,"http://"+s)%>)<br>
+      <small class="author">Submitted <%= time_ago_in_words(link.created_at) %> by 
+            <%  author = User.find_by_id(link.user_id) 
+              if(author) %>
+                <%= author.email %>
+              <% else %>
+                <%= "Inactive User" %>
+              <% end %>
+      </small>
+      <% if link.user == current_user %>
+       <%= link_to('Edit', edit_link_path(link)) %> 
+      <% end %>
+    </h2>
+  </div>
+<% end %>

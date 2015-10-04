@@ -2,5 +2,6 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @link %> |
-<%= link_to 'Back', links_path %>
+<%= link_to('Show', @link) %> |
+<%= link_to('Back', controller: "links", action: "previous") %> |
+<%= link_to('Destroy',@link, method: :delete, data: { confirm: 'Are you sure you want to delete this link?'})  %>

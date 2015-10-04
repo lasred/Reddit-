@@ -1,14 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @link.title %>
-</p>
-
-<p>
-  <strong>Url:</strong>
-  <%= @link.url %>
-</p>
-
-<%= link_to 'Edit', edit_link_path(@link) %> |
-<%= link_to 'Back', links_path %>
+ <h1>
+  	<%= link_to(@link.title, @link) %>
+	<%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
+  	<br /> 
+  	    <small>Submitted by
+            <%= @link.user.email%>
+         </small>
+ </h1>
+<div class="btn-group">
+	<% if @link.user == current_user %>
+			<%= link_to('Edit', edit_link_path(@link), class: "btn btn-default") %>
+	<% end %>
+	<%= link_to('Back', links_path, class: "btn btn-default") %>
+</div>
